@@ -21,9 +21,16 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		int h, p; cin >> h >> p;
+		while (h > 0 && p > 0) {
+			h -= p;
+			if (h == 0) break;
+			p /= 2;
+		}
+		if (h != 0 && p == 0) cout << 0 << nl;
+		else cout << 1 << nl;
+	}
 	return 0;
 }

@@ -21,9 +21,24 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		ll n, k; cin >> n >> k;
+		ll P[n];
+		bool possible = false;
+		ll mn = mod, idx;
+		for (ll i = 0; i < n; i++) {
+			cin >> P[i];
+			if (k % P[i] == 0) {
+				possible = true;
+				if (k / P[i] < mn) {
+					mn = k / P[i];
+					idx = i;
+				}
+			}
+		}
+		if (possible) cout << P[idx] << nl;
+		else cout << -1 << nl;
+	}
 	return 0;
 }

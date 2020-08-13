@@ -21,9 +21,29 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		int n; cin >> n;
+		int A[n];
+		for (int i = 0; i < n; i++) {
+			cin >> A[i];
+		}
+		if (n == 1) {
+			cout << "YES\n";
+			continue;
+		}
+		else {
+			int count = 0;
+			bool possible = true;
+			sort(A, A + n);
+			for (int i = 0; i < n - 1; i++) {
+				if (abs(A[i] - A[i + 1]) <= 1) {
+					count++;
+				}
+			}
+			if (count == n - 1) cout << "YES\n";
+			else cout << "NO\n";
+		}
+	}
 	return 0;
 }

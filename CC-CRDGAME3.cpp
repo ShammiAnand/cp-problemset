@@ -20,10 +20,18 @@ void shammi() {
 	freopen("output.txt", "w", stdout);
 #endif
 }
+
+int ceiling(int a , int b) {
+	if (a % b == 0) return a / b;
+	else return (a / b) + 1;
+}
+
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		int pc, pr; cin >> pc >> pr;
+		if (ceiling(pc, 9) < ceiling(pr, 9)) cout << 0 << " " << ceiling(pc, 9) << nl;
+		else cout << 1 << " " << ceiling(pr, 9) << nl;
+	}
 	return 0;
 }

@@ -21,9 +21,15 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	int n; cin >> n;
+	int ans = 0;
+	for (int i = 1; i * i <= n; i++) {
+		for (int j = i; j <= n; j++) {
+			if (i * j <= n) ans++;
+		}
+	}
+	cout << ans << nl;
+
 	return 0;
 }

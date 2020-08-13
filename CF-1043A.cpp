@@ -21,9 +21,18 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	int n; cin >> n;
+
+	int votes[n], sum = 0;
+	int mx = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> votes[i];
+		sum += votes[i];
+		mx = max(mx, votes[i]);
+	}
+
+	cout << max(mx, ((2 * sum) / n) + 1) << nl;
+
 	return 0;
 }

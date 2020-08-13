@@ -20,10 +20,16 @@ void shammi() {
 	freopen("output.txt", "w", stdout);
 #endif
 }
+int points[12] = {0, 0, 4, 4, 4, 4 , 4 , 4, 4, 4, 15, 4};
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	int n; cin >> n;
+	if (n <= 10) cout << 0 << nl;
+	else {
+		if (n == 11) cout << 4 << nl;
+		else {
+			cout << points[n - 10] << nl;
+		}
+	}
 	return 0;
 }

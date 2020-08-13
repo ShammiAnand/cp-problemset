@@ -21,9 +21,14 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	int n, x; cin >> n >> x;
+	int cards[n], sum = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> cards[i];
+		sum += cards[i];
+	}
+	if (abs(sum) % x == 0) cout << abs(sum) / x << nl;
+	else cout << (abs(sum) / x) + 1 << nl;
 	return 0;
 }

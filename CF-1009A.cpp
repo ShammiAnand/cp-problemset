@@ -21,9 +21,21 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	int n, m; cin >> n >> m;
+	int games[n], bills[m];
+	for (int i = 0; i < n; i++) cin >> games[i];
+	for (int i = 0; i < m; i++) cin >> bills[i];
+
+	int counter = 0, count = 0;
+	for (int i = 0; i < n; i++) {
+		if (counter == m) break;
+		if (bills[counter] >= games[i]) {
+			count++, counter++;
+		} else {
+			continue;
+		}
+	}
+	cout << count << nl;
 	return 0;
 }

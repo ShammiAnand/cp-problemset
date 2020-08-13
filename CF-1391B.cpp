@@ -21,9 +21,23 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		int n, m; cin >> n >> m;
+		char matrix[n][m];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cin >> matrix[i][j];
+			}
+		}
+		int count = 0;
+		for (int i = 0; i < m; i++) {
+			if (matrix[n - 1][i] == 'D') count++;
+		}
+		for (int i = 0; i < n; i++) {
+			if (matrix[i][m - 1] == 'R') count++;
+		}
+		cout << count << nl;
+	}
 	return 0;
 }

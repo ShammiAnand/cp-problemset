@@ -21,9 +21,37 @@ void shammi() {
 #endif
 }
 int main() {
-	// shammi();
-	int X; cin >> X;
-	if (X >= 30) cout << "Yes\n";
-	else cout << "No\n";
+	shammi();
+	w(t) {
+		ll n; cin >> n;
+		ll a[n], b[n];
+		ll count = 0, ma = mod, mb = mod;
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+			ma = min(ma, a[i]);
+		}
+		for (int i = 0; i < n; i++) {
+			cin >> b[i];
+			mb = min(mb, b[i]);
+		}
+
+
+
+		// ma = a[0];
+		// mb = b[0];
+
+		for (int i = 0; i < n; i++) {
+			ll mn = min(a[i] - ma, b[i] - mb);
+			count += mn;
+			a[i] -= mn;
+			b[i] -= mn;
+
+			count += a[i] - ma;
+			count += b[i] - mb;
+		}
+
+		cout << count << nl;
+
+	}
 	return 0;
 }
