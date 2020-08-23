@@ -24,59 +24,79 @@ int main() {
 	// shammi();
 	w(t) {
 		string s, p; cin >> s >> p;
-		// cout << s << nl << p << nl;
-		int freq[26] = {0}; int pat_freq[26] = {0};
-		for (int i = 0; i < s.length(); i++) freq[s[i] - 'a']++;
-		string ans;
-		for (int i = 0; i < p.length(); i++) freq[p[i] - 'a']--, pat_freq[p[i] - 'a']++;
-		sort(s.begin(), s.end());
-		cout << "Current String : " << s << nl;
-		int counter = 0;
+		int freq[26] = {0}, pat_freq[26] = {0};
 		for (int i = 0; i < s.length(); i++) {
-			while (pat_freq[p[counter] - 'a'] == 0 && counter < p.length()) counter++;
-			if (s[i] <= p[counter] && freq[s[i] - 'a'] > 0) {
-				// ans += s[i];
-				ans.pb(s[i]);
+			freq[s[i] - 'a']++;
+		}
+		for (int i = 0; i < p.length(); i++) {
+			pat_freq[p[i] - 'a']++;
+			freq[p[i] - 'a']--;
+		}
+		string new_str = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (freq[s[i] - 'a'] > 0) {
+				new_str += s[i];
 				freq[s[i] - 'a']--;
-			} else {
-				if (s[i] > p[counter]) {
-					// ans += p[counter];
-					ans.pb(p[counter]);
-					pat_freq[p[counter] - 'a']--;
-					if (counter < p.length() - 1) counter++;
-					continue;
-				}
-				if (freq[s[i] - 'a'] == 0) {
-					//it is from the pattern
-					if (s[i] < p[counter] && pat_freq[s[i] - 'a'] > 0) {
-						// ans += s[i];
-						ans.pb(s[i]);
-						pat_freq[s[i] - 'a']--;
-						continue;
-					}
-					if (s[i] > p[counter] && pat_freq[s[i] - 'a'] > 0) {
-						// ans += p[counter];
-						ans.pb(p[counter]);
-						pat_freq[p[counter] - 'a']--;
-						if (counter < p.length() - 1) counter++;
-						continue;
-					}
-					if (s[i] == p[counter] && pat_freq[s[i] - 'a'] > 0) {
-						// ans += p[counter];
-						ans.pb(p[counter]);
-						pat_freq[p[counter] - 'a']--;
-						if (counter < p.length() - 1) counter++;
-						continue;
-					}
-				}
 			}
 		}
-		int n = p.length();
-		if (counter < n - 1) {
-			while (counter <= n - 1) {
-				ans.pb(p[counter++]);
+		sort(new_str.begin(), new_str.end());
+		// cout << "New String : " << new_str << nl;
+		int counter = 0;
+		string ans = "";
+		bool done = false;
+		for (int i = 0; i < new_str.length(); i++) {
+			if (done) {
+				ans += new_str[i];
+				continue;
+			}
+			if (new_str[i] < p[counter] && !done) {
+				while (new_str[i] < p[counter] && i < new_str.length()) {
+					ans += new_str[i];
+					i++;
+				}
+				if (i == new_str.length()) {
+					ans += p;
+					done = true;
+					break;
+				}
+				if (new_str[i] > p[counter]) ans += p;
+				else {
+					//equal
+					int count = 0;
+					while (p[counter + count] == new_str[i] && counter + count < p.length()) count++;
+					if (counter + count == p.length()) {
+						ans += p; //try bb
+					} else {
+						if (p[counter + count] < new_str[i]) {
+							ans += p;
+						} else {
+							ans += new_str[i];
+							continue;
+						}
+					}
+				}
+				done = true;
+				ans += new_str[i];
+				continue;
+			}
+			if (new_str[i] > p[counter] && !done) {
+				ans += p;
+				ans += new_str[i];
+				done = true;
+				continue;
+			}
+			if (new_str[i] == p[counter] && !done) {
+				while (new_str[i] == p[counter] && i < new_str.length()) {
+					ans += new_str[i];
+					i++;
+				}
+				ans += p;
+				done = true;
+				i--;
+				continue;
 			}
 		}
+		if (!done) ans += p;
 		cout << ans << nl;
 	}
 	return 0;

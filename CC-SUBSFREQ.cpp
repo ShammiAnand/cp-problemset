@@ -9,7 +9,7 @@ using namespace std;
 #define mp              make_pair
 #define f               first
 #define s               second
-#define p             1000000007
+#define p               1000000007
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
 
@@ -48,14 +48,12 @@ int main() {
 			if (freq[A[i]] > 0) {
 				freq[A[i]]++;
 			} else {
+				// only storing values of one element, if repeated
 				Val[A[i]] = (power(n - A[i])) % p;
 				freq[A[i]]++;
 			}
 		}
-		// for (ll i = 1; i <= n; i++) {
-		// 	cout << (power((n - i))) % p << " ";
-		// }
-		// cout << nl;
+		//this method works for a permuation of 1...N
 		ll curr_sum = 0;
 		for (int i = 1; i <= n; i++) {
 			if (freq[i] == 0) {

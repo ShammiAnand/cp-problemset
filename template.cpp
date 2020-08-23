@@ -5,7 +5,7 @@ using namespace std;
 #define ll              long long
 #define Max(a,b,c)      max(a,max(b,c))
 #define Min(a,b,c)      min(a,min(b,c))
-#define pb              emplace_back
+#define pb              push_back
 #define mp              make_pair
 #define f               first
 #define s               second

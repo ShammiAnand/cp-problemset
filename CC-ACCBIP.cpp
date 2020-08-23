@@ -24,24 +24,24 @@ int main() {
 	shammi();
 	w(t) {
 
-		ll n, c, k; cin >> n >> c >> k;
+		int n, c, k; cin >> n >> c >> k;
 
-		map <ll, pair<ll, vector<ll> > > mp;
+		// map <int, pair<int, vector<int> > > mp;
 
-		pair<ll, ll> freq[c];
-		for (ll i = 0; i < c; i++) {
-			freq[i] = {0, (i + 1)};
+		pair<int, int> freq[c + 1];
+		for (int i = 1; i <= c; i++) {
+			freq[i] = {0, i}; //frequency,color
 		}
 
 		for (int i = 0; i < n; i++) {
-			ll a, b, c; cin >> a >> b >> c;
-			mp[c].f++;
-			mp[c].s.pb(a);
-			mp[c].s.pb(b);
-			freq[c - 1].f++;
+			int a, b, c; cin >> a >> b >> c;
+			// mp[c].f++;
+			// mp[c].s.pb(a);
+			// mp[c].s.pb(b);
+			freq[c].f++;
 		}
-		sort(freq, freq + c); reverse(freq, freq + c);
-		ll V[c + 1] = {0};
+		sort(freq + 1, freq + c + 1); reverse(freq + 1, freq + c + 1);
+		int V[c + 1] = {0};
 		// vector <pair <ll, ll> > V;
 		for (int i = 1; i <= c; i++) {
 			// ll v; cin >> v;
@@ -50,29 +50,34 @@ int main() {
 		}
 		ll Vf = V[1];
 		// sort(V.begin(), V.end());
-		ll total = 0;
+		int total = 0;
 		// for (auto elem : mp) {
 		// 	cout << elem.f << " " << elem.s.f << nl;
 		// }
 
 //-------------------------------------sol for 15pts------------------------------------------------!
 
-		for (int i = 0; i < c; i++) {
-			ll fr = freq[i].f;
-			cout << freq[i].s << " " << fr << nl;
+		for (int i = 1; i <= c; i++) {
+			int fr = freq[i].f;
+			// cout << freq[i].s << " " << freq[i].f << nl;
 			if (fr >= 3) {
 				if (k < V[freq[i].s]) {
 					total += (fr * (fr - 1) * (fr - 2)) / 6;
 				} else {
-					while (fr > 0 && (k - V[freq[i].s]) >= 0) {
-						k -= V[freq[i].s];
-						fr--;
+					int sub = k / V[freq[i].s];
+					if (sub > fr) {
+						k -= (V[freq[i].s] * fr);
+						fr = 0;
+					} else {
+						k -= (V[freq[i].s] * sub);
+						fr -= sub;
 					}
 					if (fr >= 3) {
 						total += (fr * (fr - 1) * (fr - 2)) / 6;
 					}
 				}
-			}
+				freq[i].f = fr;
+			} else continue;
 		}
 
 
