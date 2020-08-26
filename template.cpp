@@ -3,7 +3,6 @@
 using namespace std;
 
 #define ll              long long
-#define int             long long
 #define Max(a,b,c)      max(a,max(b,c))
 #define Min(a,b,c)      min(a,min(b,c))
 #define pb              push_back
