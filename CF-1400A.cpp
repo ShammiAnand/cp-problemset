@@ -26,7 +26,11 @@ int main() {
 	w(t) {
 		int n; cin >> n;
 		string S; cin >> S;
-		string ans = S.substr(0, n);
+		string ans = "";
+
+		for (int i = 0; i < S.length(); i += 2) {
+			ans += S[i];
+		}
 		cout << ans << nl;
 	}
 	return 0;

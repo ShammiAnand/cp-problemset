@@ -5,18 +5,13 @@ using namespace std;
 #define ll              long long
 #define Max(a,b,c)      max(a,max(b,c))
 #define Min(a,b,c)      min(a,min(b,c))
-#define pb              emplace_back
+#define pb              push_back
 #define mp              make_pair
 #define f               first
 #define s               second
 #define mod             1000000007
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
-
-inline bool isPowerOfTwo(int x) {
-	//O(v) -> v is the number of bits in the binary form of x
-	return x && (!(x & (x - 1)));
-}
 
 void shammi() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -25,198 +20,50 @@ void shammi() {
 	freopen("output.txt", "w", stdout);
 #endif
 }
-int main() {
-	shammi();
-	int r, g, b; cin >> r >> g >> b;
-	int R[r], B[b], G[g];
-	for (int i = 0; i < r; i++) cin >> R[i];
-	for (int i = 0; i < g; i++) cin >> G[i];
-	for (int i = 0; i < b; i++) cin >> B[i];
 
-	sort(R, R + r, greater<int>());
-	sort(G, G + g, greater<int>());
-	sort(B, B + b, greater<int>());
-	int rc = 0, bc = 0, gc = 0;
-	int sum = 0;
-	while ((rc < r && bc < b) || (rc < r && gc < g) || (gc < g && bc < b)) {
-		if (rc < r && gc < g && bc < b) {
-			if (R[rc] >= G[gc]) {
-				if (R[rc] == G[gc]) {
-					int rcc = rc, gcc = gc;
-					while (R[rcc] == G[gcc] &&  rcc < r && gcc < r) {
-						rcc++, gcc++;
-					}
-					if (rcc >= r || gcc >= r) {
-						if (B[bc] >= G[gc]) {
-							if (B[bc] == G[gc]) {
-								int bcc = bc, gcc = gc;
-								while (B[bcc] == G[gcc] &&  bcc < b && gcc < r) {
-									bcc++, gcc++;
-								}
-								if (bcc >= b || gcc >= g) {
-									sum += B[bc] * R[rc];
-									// cout << B[bc] << " " << R[rc] << nl;
-									bc++, rc++;
-									continue;
-								} else {
-									if (B[bcc] > G[gcc]) {
-										sum += B[bc] * R[rc];
-										// cout << B[bc] << " " << R[rc] << nl;
-										bc++, rc++;
-										continue;
-									} else {
-										sum += G[gc] * R[rc];
-										// cout << B[bc] << " " << R[rc] << nl;
-										rc++, gc++;
-										continue;
-									}
-								}
-							}
-							sum += B[bc] * R[rc];
-							// cout << B[bc] << " " << R[rc] << nl;
-							bc++, rc++;
-							continue;
-						} else {
-							sum += R[rc] * G[gc];
-							// cout << G[gc] << " " << R[rc] << nl;
-							rc++, gc++;
-							continue;
-						}
-					} else {
-						if (R[rcc] > G[gcc]) {
-							//use R
-							if (B[bc] >= G[gc]) {
-								if (B[bc] == G[gc]) {
-									int bcc = bc, gcc = gc;
-									while (B[bcc] == G[gcc] &&  bcc < b && gcc < r) {
-										bcc++, gcc++;
-									}
-									if (bcc >= b || gcc >= g) {
-										sum += B[bc] * R[rc];
-										// cout << B[bc] << " " << R[rc] << nl;
-										bc++, rc++;
-										continue;
-									} else {
-										if (B[bcc] > G[gcc]) {
-											sum += B[bc] * R[rc];
-											// cout << B[bc] << " " << R[rc] << nl;
-											bc++, rc++;
-											continue;
-										} else {
-											sum += G[gc] * R[rc];
-											// cout << B[bc] << " " << R[rc] << nl;
-											rc++, gc++;
-											continue;
-										}
-									}
-								}
-								sum += B[bc] * R[rc];
-								// cout << B[bc] << " " << R[rc] << nl;
-								bc++, rc++;
-								continue;
-							} else {
-								sum += R[rc] * G[gc];
-								// cout << G[gc] << " " << R[rc] << nl;
-								rc++, gc++;
-								continue;
-							}
-						} else {
-							//use G
-							if (B[bc] >= G[gc]) {
-								if (B[bc] == G[gc]) {
-									int bcc = bc, gcc = gc;
-									while (B[bcc] == G[gcc] &&  bcc < b && gcc < r) {
-										bcc++, gcc++;
-									}
-									if (bcc >= b || gcc >= g) {
-										sum += B[bc] * R[rc];
-										// cout << B[bc] << " " << R[rc] << nl;
-										bc++, rc++;
-										continue;
-									} else {
-										if (B[bcc] > G[gcc]) {
-											sum += B[bc] * G[gc];
-											// cout << B[bc] << " " << R[rc] << nl;
-											bc++, gc++;
-											continue;
-										} else {
-											sum += G[gc] * R[rc];
-											// cout << B[bc] << " " << R[rc] << nl;
-											rc++, gc++;
-											continue;
-										}
-									}
-								}
-								sum += B[bc] * R[rc];
-								// cout << B[bc] << " " << R[rc] << nl;
-								bc++, rc++;
-								continue;
-							} else {
-								sum += R[rc] * G[gc];
-								// cout << G[gc] << " " << R[rc] << nl;
-								rc++, gc++;
-								continue;
-							}
-						}
-					}
-				}
-				if (B[bc] >= G[gc]) {
-					if (B[bc] == G[gc]) {
-						if (g > r) {
-							sum += G[gc] * R[rc];
-							gc++, rc++;
-							continue;
-						}
-					}
-					sum += B[bc] * R[rc];
-					// cout << B[bc] << " " << R[rc] << nl;
-					bc++, rc++;
-					continue;
-				} else {
-					sum += R[rc] * G[gc];
-					// cout << G[gc] << " " << R[rc] << nl;
-					rc++, gc++;
-					continue;
-				}
-			} else {
-				if (B[bc] >= R[rc]) {
-					if (B[bc] == R[rc]) {
-						if (b < r) {
-							sum += G[gc] * R[rc];
-							gc++, rc++;
-							continue;
-						}
-					}
-					sum += G[gc] * B[bc];
-					// cout << B[bc] << " " << G[gc] << nl;
-					bc++, gc++;
-					continue;
-				} else {
-					sum += G[gc] * R[rc];
-					// cout << G[gc] << " " << R[rc] << nl;
-					gc++, rc++;
-					continue;
-				}
-			}
-		} else {
-			if (rc >= r) {
-				sum += B[bc] * G[gc];
-				// cout << B[bc] << " " << G[gc] << nl;
-				bc++, gc++;
-				continue;
-			} else if (bc >= b) {
-				sum += R[rc] * G[gc];
-				// cout << G[gc] << " " << R[rc] << nl;
-				rc++, gc++;
-				continue;
-			} else if (gc >= g) {
-				sum += R[rc] * B[bc];
-				// cout << B[bc] << " " << R[rc] << nl;
-				rc++, bc++;
-				continue;
-			}
-		}
+const int N = 205;
+ll dp[N][N][N];
+ll r[N], g[N], b[N];
+
+ll MaxArea(int R, int G, int B) {
+	if ((R == 0 && G == 0) || (R == 0 && B == 0) || (B == 0 && G == 0) || (R == 0 && B == 0 && G == 0)) {
+		return 0;
 	}
-	cout << sum << nl;
+	// assert(R >= 0 && G >= 0 && B >= 0);
+	if (dp[R][G][B] != -1) {
+		return dp[R][G][B];
+	}
+	dp[R][G][B] = 0; //beacuse it's initially -1
+
+	if (R > 0 && G > 0) {
+		dp[R][G][B] = max(dp[R][G][B], MaxArea(R - 1, G - 1, B) + r[R] * g[G]);
+	}
+	if (R > 0 && B > 0) {
+		dp[R][G][B] = max(dp[R][G][B], MaxArea(R - 1, G, B - 1) + r[R] * b[B]);
+	}
+	if (B > 0 && G > 0) {
+		dp[R][G][B] = max(dp[R][G][B], MaxArea(R, G - 1, B - 1) + b[B] * g[G]);
+	}
+	return dp[R][G][B];
+}
+
+
+int main() {
+	int R, G, B;
+	cin >> R >> G >> B;
+	for (int i = 1; i <= R; i++) {
+		cin >> r[i];
+	}
+	for (int i = 1; i <= G; i++) {
+		cin >> g[i];
+	}
+	for (int i = 1; i <= B; i++) {
+		cin >> b[i];
+	}
+	sort(r + 1, r + R + 1);
+	sort(g + 1, g + G + 1);
+	sort(b + 1, b + B + 1);
+	memset(dp, -1 , sizeof(dp));
+	cout << MaxArea(R, G, B) << nl;
 	return 0;
 }

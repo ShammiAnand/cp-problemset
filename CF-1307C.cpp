@@ -22,15 +22,24 @@ void shammi() {
 #endif
 }
 int main() {
-	shammi();
+	// shammi();
 	string S; cin >> S;
-	int freq[26] = {0};
+	ll freq[26] = {0};
+	ll dp[26][26];
+	memset(dp, 0, sizeof(dp));
+	ll ans = 0;
 	for (int i = 0; i < S.length(); i++) {
-		freq[S[i] - 'a']++;
+		int curr = S[i] - 'a';
+		for (int j = 0; j < 26; j++) {
+			dp[curr][j] += freq[j];
+		}
+		freq[curr]++;
 	}
-	sort(freq, freq + 26, greater<int>());
-
-	if (freq[1] != 0) cout << freq[0]*freq[1] << nl;
-	else cout << freq[0]*(freq[0] - 1) / 2 << nl;
-	return 0;
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 26; j++) {
+			ans = max(ans, dp[i][j]);
+		}
+	}
+	for (int i = 0; i < 26; i++) ans = max(ans, freq[i]);
+	cout << ans << nl;
 }
