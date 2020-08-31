@@ -3,13 +3,12 @@
 using namespace std;
 
 #define ll              long long
-#define Max(a,b,c)      max(a,max(b,c))
-#define Min(a,b,c)      min(a,min(b,c))
 #define pb              push_back
 #define mp              make_pair
 #define f               first
 #define s               second
 #define mod             1000000007
+#define INF             1e9+7
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
 
@@ -21,6 +20,7 @@ void shammi() {
 	freopen("output.txt", "w", stdout);
 #endif
 }
+
 int main() {
 	shammi();
 	w(t) {

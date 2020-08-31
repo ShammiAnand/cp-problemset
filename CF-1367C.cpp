@@ -20,48 +20,36 @@ void shammi() {
 int main() {
 	shammi();
 	w(t) {
-		int n, k; cin >> n >> k;
-		int one = 0;
-		string tables; cin >> tables;
-		vector <int> diff;
-		int count = 0;
-		int inc = 0;
-		bool skip = false;
-		if (tables[0] == '0') skip = true;
-		for (int i = 0; i < n; i++) {
-			if (tables[i] == '1') {
-				one++;
-				if (count > 0 && !skip) {
-					diff.pb(count);
-				} else {
-					if (count > 0) {
-						inc += count;
-						skip = false;
-					}
-				}
-				count = 0;
-			} else {
-				count++;
+		int n, k;
+		cin >> n >> k;
+		string s;
+		cin >> s;
+
+		int res = 0;
+
+		for (int i = 0; i < n;) {
+			int j = i + 1;
+
+			for (; j < n && s[j] != '1'; j++);
+
+			int left = s[i] == '1' ? k : 0;
+			int right = j < n && s[j] == '1' ? k : 0;
+			int len = j - i;
+
+			if (left == k) {
+				len--;
 			}
-		}
-		int answer = 0;
-		for (auto dist : diff) { // 1...1
-			if (dist - 2 * k > 0) {
-				answer += (dist - 2 * k) / k;
+
+			len -= left + right;
+
+			if (len > 0) {
+				res += (len + k) / (k + 1);
 			}
+
+			i = j;
 		}
-		if (count - k > 0 && one != 0) { //1....
-			answer += (count - k) / k;
-		}
-		if (inc - k > 0 && one != 0) { // ...1
-			answer += (inc - k) / k;
-		}
-		if (one == 0) { // ......
-			if (count > 0) ++answer;
-			count--;
-			if (count - k > 0) answer += (count - k) / k;
-		}
-		cout << answer << nl;
+
+		cout << res << endl;
 	}
 	return 0;
 }
