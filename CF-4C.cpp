@@ -23,18 +23,19 @@ void shammi() {
 
 int main() {
 	shammi();
-	w(t) {
-		int n, k;
-		cin >> n >> k;
-		string s(n, 'a');
-		for (int i = n - 2; i >= 0; i--) {
-			if (k <= (n - i - 1)) {
-				s[i] = 'b';
-				s[n - k] = 'b';
-				cout << s << endl;
-				break;
-			}
-			k -= (n - i - 1);
+	map<string, int> names;
+	w(n) {
+		string S; cin >> S;
+		if (names.find(S) != names.end()) {
+			//name exists
+			string temp = S + to_string(names[S]);
+			names[S]++;
+			cout << temp << nl;
+			names[temp]++;
+		} else {
+			//name dosen't exists
+			names[S]++;
+			cout << "OK\n";
 		}
 	}
 	return 0;
