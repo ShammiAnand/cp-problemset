@@ -1,13 +1,22 @@
-//This code is written by Shammi Anand
+/*
+This code is written by Shammi Anand
+contact : shammianand101@gmail.com, shammianand.me
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
 #define ll              long long
 #define pb              push_back
-#define mp              make_pair
 #define f               first
 #define s               second
-#define mod             1000000007
+#define vi              vector<int>
+#define pii             pair<int, int>
+#define rep(i,a,n)      for(int i=a;i<n;i++)
+#define F(i,n)          for(int i=0;i<n;i++)
+#define all(a)          a.begin(), a.end()
+#define sort(a)         sort(all(a))
+#define reverse(a)      reverse(all(a))
+#define print(a)        for(auto x : a) cout << x << " ";
 #define INF             1e9+7
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
