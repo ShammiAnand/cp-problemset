@@ -2,7 +2,6 @@
 This code is written by Shammi Anand
 contact : shammianand101@gmail.com, shammianand.me
 */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,60 +27,29 @@ void shammi() {
 #endif
 }
 
-void transpose(int matrix[64][64], int L) {
-	int copy[L][L];
-	F(i, L) {
-		F(j, L) {
-			copy[i][j] = matrix[i][j];
-		}
-	}
-	F(i, L) {
-		F(j, L) {
-			matrix[i][j] = copy[i][j];
-		}
-	}
-}
-
-bool check(int matrix[64][64], int n) {
-	F(i, n) {
-		F(j, n) {
-			if (matrix[i][j] != (i - 1)*n + j) return false;
-		}
-	}
-	return true;
-}
-
 int main() {
 	shammi();
 	w(t) {
 		int n; cin >> n;
-		int matrix[64][64], copy[64][64];
-		F(i, n) {
-			F(j, n) {
-				cin >> matrix[i][j];
+		vi a(n), freq(101, 0);
+		for (int& elem : a) {
+			cin >> elem;
+			freq[elem]++;
+		}
+		int ans = 0, picked = 0;
+		for (int i = 0; i <= 100; i++) {
+			if (freq[i] == 0) {
+				ans += i;
+				break;
 			}
 		}
-		F(i, n) {
-			// matrix = copy;
-			F(j, n) {
-				copy[i][j] = matrix[i][j];
+		for (int i = 0; i <= 100; i++) {
+			if (freq[i] <= 1) {
+				ans += i;
+				break;
 			}
 		}
-		int mn = INF;
-		F(i, n) {
-			F(k, n) F(z, n) matrix[k][z] = copy[k][z];
-			int count = 0;
-			while (!check(matrix, n) && count < n) {
-				transpose(matrix, count);
-				if (check(matrix, n)) {
-					break;
-				} else {
-					count++;
-				}
-			}
-			mn = min(count, mn);
-		}
-		cout << mn << nl;
+		cout << ans << nl;
 	}
 	return 0;
 }
