@@ -29,88 +29,45 @@ void shammi() {
 }
 
 
-bool isSorted(vi& arr) {
-	for (int i = 0; i < arr.size() - 1; i++) {
-		if (arr[i] > arr[i + 1]) return false;
-	}
-	return true;
-}
-
-
-int three(vi& arr) {
-	if (isSorted(V)) {
-		cout << 1 << " " << 1 << nl;
-	} else {
-		int mn = 100, mx = 0, count = 1;
-		for (int i = 0; i < n; i++) {
-			count = 1;
-			for (int j = i + 1; j < n; j++) {
-				if (V[j] < V[i]) {
-					count++;
-				}
-			}
-			for (int j = 0; j < i; j++) {
-				if (V[j] > V[i]) {
-					count++;
-				}
-			}
-			mx = max(count, mx);
-			mn = min(mn, count);
-		}
-
-		cout << mn << " " << mx << nl;
-	}
-}
-
-int four(vi& arr) {
-
-}
-
-int five(vi& arr) {
-
-}
-
-void solve(vi& arr, int n) {
-	if (n == 3) {
-		three(vi & arr);
-	} else if (n == 4) {
-		four(vi & arr);
-	} else {
-		five(vi & arr);
-	}
-}
-
 
 int main() {
 	shammi();
 	w(t) {
 		int n; cin >> n;
-		vi V(n);
-		for (int& elem : V) {
+		vi v(n);
+		for (int& elem : v) {
 			cin >> elem;
 		}
-		// if (isSorted(V)) {
-		// 	cout << 1 << " " << 1 << nl;
-		// } else {
-		// 	int mn = 100, mx = 0, count = 1;
-		// 	for (int i = 0; i < n; i++) {
-		// 		count = 1;
-		// 		for (int j = i + 1; j < n; j++) {
-		// 			if (V[j] < V[i]) {
-		// 				count++;
-		// 			}
-		// 		}
-		// 		for (int j = 0; j < i; j++) {
-		// 			if (V[j] > V[i]) {
-		// 				count++;
-		// 			}
-		// 		}
-		// 		mx = max(count, mx);
-		// 		mn = min(mn, count);
-		// 	}
-
-		// 	cout << mn << " " << mx << nl;
-		// }
+		int mini = n;
+		int maxi = 0;
+		map<pii, vi> mp;
+		F(i, n) {
+			rep(j, i + 1, n) if (v[i] > v[j]) {
+				int t = ((j - i) * 120) / (v[i] - v[j]);
+				int x = i * 120 + v[i] * t;
+				assert(120 * i + v[i]*t == 120 * j + v[j]*t);
+				mp[ {t, x}].push_back(i);
+				mp[ {t, x}].push_back(j);
+			}
+		}
+		F(i, n) {
+			vector<bool>infected(n);
+			infected[i] = true;
+			for (auto p : mp) {
+				bool spread = false;
+				for (int x : p.second)spread |= infected[x];
+				if (spread) {
+					for (int x : p.second) {
+						infected[x] = true;
+					}
+				}
+			}
+			int cnt = 0;
+			for (int x : infected) cnt += x;
+			mini = min(mini, cnt);
+			maxi = max(maxi, cnt);
+		}
+		printf("%d %d\n", mini, maxi);
 	}
 	return 0;
 }

@@ -2,7 +2,6 @@
 This code is written by Shammi Anand
 contact : shammianand101@gmail.com, shammianand.me
 */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,27 +27,28 @@ void shammi() {
 #endif
 }
 
+const int mxN = 1e5;
+
+ll dp[mxN + 1];
 
 int main() {
 	shammi();
-	w(t) {
-		int n; cin >> n;
-		int matrix[64][64];
-		F(i, n) {
-			F(j, n) {
-				cin >> matrix[i][j];
-			}
-		}
-		int count = 0;
-		for (int j = n - 1; j > 0; j--) {
-			if (matrix[0][j] != j + 1) {
-				if (count % 2 == 0) count++;
-			}
-			else {
-				if (count % 2 != 0) count++;
-			}
-		}
-		cout << count << nl;
+	int n; cin >> n;
+	map<int, int> mp;
+	vector<pii> v;
+	F(i, n) {
+		int elem; cin >> elem;
+		mp[elem]++;
 	}
+	for (pii p : mp) v.pb(p);
+
+	F(i, ((int)v.size())) {
+		int pr = i - 1;
+		while (pr >= 0 && v[pr].f + 1 == v[i].f) pr--;
+		if (pr == -1) dp[i] = 1LL * v[i].f * v[i].s;
+		else dp[i] = dp[pr] + 1LL * v[i].f * v[i].s;
+		if (i != 0) dp[i] = max(dp[i], dp[i - 1]);
+	}
+	cout << dp[v.size() - 1] << nl;
 	return 0;
 }

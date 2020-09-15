@@ -2,7 +2,6 @@
 This code is written by Shammi Anand
 contact : shammianand101@gmail.com, shammianand.me
 */
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -28,27 +27,14 @@ void shammi() {
 #endif
 }
 
-
 int main() {
 	shammi();
-	w(t) {
-		int n; cin >> n;
-		int matrix[64][64];
-		F(i, n) {
-			F(j, n) {
-				cin >> matrix[i][j];
-			}
-		}
-		int count = 0;
-		for (int j = n - 1; j > 0; j--) {
-			if (matrix[0][j] != j + 1) {
-				if (count % 2 == 0) count++;
-			}
-			else {
-				if (count % 2 != 0) count++;
-			}
-		}
-		cout << count << nl;
+	ll n, mx = 0, sum = 0; cin >> n;
+	F(i, n) {
+		ll elem; cin >> elem;
+		sum += elem;
+		mx = max(mx, elem);
 	}
+	puts((sum % 2 == 1 || sum < 2 * mx) ? "NO" : "YES");
 	return 0;
 }
