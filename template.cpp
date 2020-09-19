@@ -18,6 +18,15 @@ using namespace std;
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
 
+template<typename T_vector>
+void output(const T_vector &v, int start = -1, int end = -1) {
+	if (start < 0) start = 0;
+	if (end < 0) end = int(v.size());
+
+	for (int i = start; i < end; i++) {
+		cout << v[i] << (i < end - 1 ? ' ' : '\n');
+	}
+}
 
 void shammi() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
