@@ -24,7 +24,7 @@ void output(const T_vector &v, int start = -1, int end = -1) {
 	if (end < 0) end = int(v.size());
 
 	for (int i = start; i < end; i++) {
-		cout << v[i] << (i < end - 1 ? ' ' : '\n');
+		cout << v[i].f << " " << v[i].s << nl;
 	}
 }
 
@@ -38,26 +38,19 @@ void shammi() {
 
 int main() {
 	shammi();
-	w(t) {
-		int n; cin >> n;
-		vi a(n), freq(n + 1);
-		for (int& elem : a) {
-			cin >> elem;
-			freq[elem]++;
-		}
-		int ans = 0;
-		for (int l = 0; l < n; ++l) {
-			int sum = 0;
-			for (int r = l; r < n; ++r) {
-				sum += a[r];
-				if (l == r) continue;
-				if (sum <= n) {
-					ans += freq[sum];
-					freq[sum] = 0;
-				}
-			}
-		}
-		cout << ans << nl;
+	int n; cin >> n;
+	vector<pii> examDays(n);
+	for (int i = 0; i < n; i++) {
+		int a, b; cin >> a >> b;
+		examDays[i] = {a, b};
 	}
+	sort(examDays.begin(), examDays.end());
+	// output(examDays);
+	int best = -1;
+	for (pii day : examDays) {
+		if (best <= day.s) best = day.s;
+		else best = day.f;
+	}
+	cout << best << nl;
 	return 0;
 }

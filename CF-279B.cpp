@@ -9,7 +9,7 @@ using namespace std;
 #define pb              push_back
 #define f               first
 #define s               second
-#define vi              vector<int>
+#define vi              vector<ll>
 #define pii             pair<int, int>
 #define rep(i,a,n)      for(int i=a;i<n;i++)
 #define F(i,n)          for(int i=0;i<n;i++)
@@ -37,11 +37,11 @@ void shammi() {
 }
 
 
-int search(vi arr, int idx, int total) {
-	int n = (int)arr.size();
-	int l = idx, r = n - 1;
+ll search(vi arr, ll idx, ll total) {
+	ll n = (ll)arr.size();
+	ll l = idx, r = n - 1;
 	while (l < r) {
-		int mid = (l + r) >> 1;
+		ll mid = (l + r) >> 1;
 		mid++;
 		if (arr[mid] - arr[idx - 1] <= total) l = mid;
 		else r = mid - 1;
@@ -53,19 +53,20 @@ int search(vi arr, int idx, int total) {
 
 int main() {
 	shammi();
-	int n, total, prev = 0, count = 0; cin >> n >> total;
-	vi time(n + 1), prefix(n + 1, 0);
-	rep(i, 1, n + 1) {
-		cin >> time[i];
-		if (i == 1) prefix[i] += time[i];
-		else prefix[i] += prefix[i - 1] + time[i];
+	ll n, t; cin >> n >> t;
+	vi arr(n);
+	for (ll& elem : arr) cin >> elem;
+	int p1 = 0, p2 = 0;
+	int ans = 0, count = 0;
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		sum += arr[i];
+		while (sum > t) {
+			sum -= arr[p1];
+			p1++;
+		}
+		ans = max(ans, i - p1 + 1);
 	}
-	// output(prefix);
-	int left = 0, right = n - 1, mx = 0;
-	rep(i, 1, n + 1) {
-		if (time[i] > total) continue;
-		mx = max(mx, search(prefix, i, total));
-	}
-	cout << mx << nl;
+	cout << ans << nl;
 	return 0;
 }

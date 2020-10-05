@@ -2,6 +2,7 @@
 This code is written by Shammi Anand
 contact : shammianand101@gmail.com, shammianand.me
 */
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -17,6 +18,7 @@ using namespace std;
 #define INF             1e9+7
 #define nl              "\n"
 #define w(x)            int x; cin>>x; while(x--)
+
 
 template<typename T_vector>
 void output(const T_vector &v, int start = -1, int end = -1) {
@@ -39,25 +41,9 @@ void shammi() {
 int main() {
 	shammi();
 	w(t) {
-		int n; cin >> n;
-		vi a(n), freq(n + 1);
-		for (int& elem : a) {
-			cin >> elem;
-			freq[elem]++;
-		}
-		int ans = 0;
-		for (int l = 0; l < n; ++l) {
-			int sum = 0;
-			for (int r = l; r < n; ++r) {
-				sum += a[r];
-				if (l == r) continue;
-				if (sum <= n) {
-					ans += freq[sum];
-					freq[sum] = 0;
-				}
-			}
-		}
-		cout << ans << nl;
+		int a, b, c; cin >> a >> b >> c;
+		cout << max({a, b, c}) + 1 << nl;
+
 	}
 	return 0;
 }

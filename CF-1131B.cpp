@@ -38,26 +38,24 @@ void shammi() {
 
 int main() {
 	shammi();
-	w(t) {
-		int n; cin >> n;
-		vi a(n), freq(n + 1);
-		for (int& elem : a) {
-			cin >> elem;
-			freq[elem]++;
-		}
-		int ans = 0;
-		for (int l = 0; l < n; ++l) {
-			int sum = 0;
-			for (int r = l; r < n; ++r) {
-				sum += a[r];
-				if (l == r) continue;
-				if (sum <= n) {
-					ans += freq[sum];
-					freq[sum] = 0;
-				}
-			}
-		}
-		cout << ans << nl;
+	int n; cin >> n;
+	vector<pii> scores;
+	// set<pii> st;
+	pii prev = {0, 0};
+	for (int i = 0; i < n; i++) {
+		int x, y; cin >> x >> y;
+		scores.pb({x, y});
 	}
+	int draws = 1;
+	for (pii score : scores) {
+		if (score == prev) continue;
+		int mn = min(score.f, score.s);
+		int mx = max(prev.f, prev.s);
+		draws += max(0, (mn - mx) + 1);
+		// cout << "increment when ( " << score.f << " " << score.s << " ) = " << ((mn - mx) + 1) << nl;
+		if (prev.f == prev.s) draws--;
+		prev = score;
+	}
+	cout << draws << nl;
 	return 0;
 }

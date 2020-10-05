@@ -39,21 +39,16 @@ void shammi() {
 int main() {
 	shammi();
 	w(t) {
-		int n; cin >> n;
-		vi a(n), freq(n + 1);
-		for (int& elem : a) {
-			cin >> elem;
-			freq[elem]++;
-		}
+		int n, k; cin >> n >> k;
+		int a[n];
+		for (int i = 0; i < n; i++) cin >> a[i];
+		int mn = min_element(a, a + n) - a;
 		int ans = 0;
-		for (int l = 0; l < n; ++l) {
-			int sum = 0;
-			for (int r = l; r < n; ++r) {
-				sum += a[r];
-				if (l == r) continue;
-				if (sum <= n) {
-					ans += freq[sum];
-					freq[sum] = 0;
+		for (int i = 0; i < n; i++) {
+			if (i != mn) {
+				while (a[i] + a[mn] <= k) {
+					a[i] += a[mn];
+					ans++;
 				}
 			}
 		}
