@@ -7,6 +7,7 @@ using namespace std;
 #define Min(a,b,c)      min(a,min(b,c))
 #define pb              push_back
 #define mp              make_pair
+#define rep(i,a,n)      for (int i=a;i<n;i++)
 #define f               first
 #define s               second
 #define mod             1000000007
@@ -27,37 +28,22 @@ void shammi() {
 }
 
 
+const int N = 110;
+int p, q, l, r, ans, tl, tr;
+int pool[10000], pa[10000], pb[10000], *vis = pool + 5000, *a = pa + 5000, *b = pb + 5000;
+
 int main() {
 	shammi();
-	int p, q, l, r; cin >> p >> q >> l >> r;
-	vector<pair<int, int>> Z, X;
-	for (int i = 0; i < p; i++) {
-		int a, b; cin >> a >> b;
-		Z.pb({a, b});
+	scanf("%d%d%d%d", &p, &q, &l, &r);
+	rep(i, 0, p) {
+		scanf("%d%d", &tl, &tr);
+		rep(j, tl, tr) a[j] = 1;
 	}
-	for (int i = 0; i < q; i++) {
-		int a, b; cin >> a >> b;
-		X.pb({a, b});
+	rep(i, 0, q) {
+		scanf("%d%d", &tl, &tr);
+		rep(j, tl, tr) b[j] = 1;
 	}
-	// sort(Z.begin(), Z.end());
-	// sort(X.begin(), X.end());
-	int total = 0, count = 0;
-	for (int i = l; i <= r; i++) {
-		bool possible = false;
-		count = 0;
-		for (auto x : X) {
-			count = 0;
-			possible = false;
-			for (auto z : Z) {
-				if (((x.f + i) >= z.f && (x.f + i) <= z.s) || ((x.s + i) >= z.f && (x.s + i) <= z.s)) {
-					possible = true;
-					count++;
-				}
-			}
-			if (possible) total += count;
-		}
-	}
-	cout << total << nl;
-
-	return 0;
+	rep(i, 0, 1001) rep(j, 0, 1001) if (a[i] && b[j]) vis[i - j] = vis[i - j - 1] = 1;
+	rep(k, l, r + 1) ans += vis[k] | vis[k - 1];
+	printf("%d\n", ans);
 }
