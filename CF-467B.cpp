@@ -24,7 +24,7 @@ void output(const T_vector &v, int start = -1, int end = -1) {
 	if (end < 0) end = int(v.size());
 
 	for (int i = start; i < end; i++) {
-		cout << v[i] << (i < end - 1 ? ' ' : '\n');
+		cout << v[i] << "\n";
 	}
 }
 
@@ -38,43 +38,23 @@ void shammi() {
 
 int main() {
 	shammi();
-	w(t) {
-		string check; cin >> check;
-		// map<char, int> freq;
-		set<char> S;
-		if (check.length() == 1) {
-			cout << check << nl;
-			continue;
-		}
-		for (char c : check) S.insert(c);
-		string ans = "";
-		for (char curr_char : S) {
-			bool skip = false;
-			bool faulty = true;
-			for (int i = 0; i < check.length(); i++) {
-				if (skip) {
-					skip = false;
-					continue;
-				}
-				if (i == check.length() - 1) {
-					if (check[i] == curr_char) ans += curr_char;
-					continue;
-				}
-				if (check[i] == curr_char) {
-					if (check[i + 1] == curr_char) {
-						skip = true;
-						continue;
-					} else {
-						faulty = false;
-						break;
-					}
-				}
-			}
-            if (!faulty){
-                ans += curr_char;
-            }
-		}
-		cout << ans << nl;
+	int n, m, k; cin >> n >> m >> k;
+	vector<string> bits(m + 1);
+	for (int i = 0; i <= m; i++) {
+		int x; cin >> x;
+		bits[i] = (bitset<21>(x).to_string());
 	}
+	// cout << bits[m] << nl;
+	// output(bits);
+	string target = bits[m];
+	int ans = 0;
+	for (int i = 0; i < m; i++) {
+		int count = 0;
+		for (int j = 0; j <= 20; j++) {
+			if (target[j] != bits[i][j]) count++;
+		}
+		if (count <= k) ans++;
+	}
+	cout << ans << nl;
 	return 0;
 }

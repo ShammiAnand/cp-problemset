@@ -38,43 +38,17 @@ void shammi() {
 
 int main() {
 	shammi();
-	w(t) {
-		string check; cin >> check;
-		// map<char, int> freq;
-		set<char> S;
-		if (check.length() == 1) {
-			cout << check << nl;
-			continue;
-		}
-		for (char c : check) S.insert(c);
-		string ans = "";
-		for (char curr_char : S) {
-			bool skip = false;
-			bool faulty = true;
-			for (int i = 0; i < check.length(); i++) {
-				if (skip) {
-					skip = false;
-					continue;
-				}
-				if (i == check.length() - 1) {
-					if (check[i] == curr_char) ans += curr_char;
-					continue;
-				}
-				if (check[i] == curr_char) {
-					if (check[i + 1] == curr_char) {
-						skip = true;
-						continue;
-					} else {
-						faulty = false;
-						break;
-					}
-				}
-			}
-            if (!faulty){
-                ans += curr_char;
-            }
-		}
-		cout << ans << nl;
+	ll n; cin >> n;
+	vector<ll> a(n);
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
 	}
+	ll ans = 0, cur = 1e18;
+	for (int i = n - 1; i >= 0; i--) {
+		cur = min(cur - 1, a[i]);
+		cur = max(0LL, cur);
+		ans += cur;
+	}
+	cout << ans << nl;
 	return 0;
 }
