@@ -1,28 +1,64 @@
+/*
+This code is written by Shammi Anand
+contact : shammianand101@gmail.com, shammianand.me
+*/
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
-int main(){
-	ll t;
-	cin >> t;
-	while(t--){
-		int alpha[26]={0};
-		ll n,m;
-		cin >> n >> m;
+
+#define ll              long long
+#define pb              push_back
+#define f               first
+#define s               second
+#define vi              vector<int>
+#define pii             pair<int, int>
+#define rep(i,a,n)      for(int i=a;i<n;i++)
+#define F(i,n)          for(int i=0;i<n;i++)
+#define all(a)          a.begin(), a.end()
+#define INF             1e9+7
+#define nl              "\n"
+#define w(x)            int x; cin>>x; while(x--)
+
+template<typename T_vector>
+void output(const T_vector &v, int start = -1, int end = -1) {
+	if (start < 0) start = 0;
+	if (end < 0) end = int(v.size());
+
+	for (int i = start; i < end; i++) {
+		cout << v[i] << (i < end - 1 ? ' ' : '\n');
+	}
+}
+
+void shammi() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+}
+
+int main() {
+	shammi();
+	w(t) {
+		int n, m;
 		string s;
-		cin >> s;
-		ll p[m];
-		for(int i=0;i<m;i++) cin >> p[i];
-		for(int i=0;i<n;i++) alpha[s[i]-'a']++;
-
-		for(int i=0;i<m;i++){
-			for(int j=0;j<p[i];j++){
-				alpha[s[j]-'a']++;
-			}
-			// alpha[s[i]-'a']+=n-p[i];
+		cin >> n >> m >> s;
+		vector<int> pref(n);
+		for (int i = 0; i < m; ++i) {
+			int p;
+			cin >> p;
+			++pref[p - 1];
 		}
-
-		for(int i=0;i<26;i++) cout << alpha[i] << " ";
-		cout << endl;
+		for (int i = n - 1; i > 0; --i) {
+			pref[i - 1] += pref[i];
+		}
+		vector<int> ans(26);
+		for (int i = 0; i < n; ++i) {
+			ans[s[i] - 'a'] += pref[i];
+			++ans[s[i] - 'a'];
+		}
+		for (int i = 0; i < 26; ++i) {
+			cout << ans[i] << (i + 1 == 26 ? "\n" : " ");
+		}
 	}
 	return 0;
 }

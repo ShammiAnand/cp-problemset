@@ -1,39 +1,72 @@
+/*
+This code is written by Shammi Anand
+contact : shammianand101@gmail.com, shammianand.me
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
-int main(){
-	int t;
-	cin >> t;
-	while(t--){
+#define ll              long long
+#define pb              push_back
+#define f               first
+#define s               second
+#define vi              vector<int>
+#define pii             pair<int, int>
+#define rep(i,a,n)      for(int i=a;i<n;i++)
+#define F(i,n)          for(int i=0;i<n;i++)
+#define all(a)          a.begin(), a.end()
+#define INF             1e9+7
+#define nl              "\n"
+#define w(x)            int x; cin>>x; while(x--)
 
-		int n,m;
+template<typename T_vector>
+void output(const T_vector &v, int start = -1, int end = -1) {
+	if (start < 0) start = 0;
+	if (end < 0) end = int(v.size());
 
+	for (int i = start; i < end; i++) {
+		cout << v[i] << (i < end - 1 ? ' ' : '\n');
+	}
+}
+
+void shammi() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
+#endif
+}
+
+int main() {
+	shammi();
+	w(t) {
+		int n, m;
 		cin >> n >> m;
-
-		int a[n],a_sorted[n],p[m];
-		for(int i=0;i<n;i++) cin >> a[i];
-		for(int i=0;i<m;i++) cin >> p[i];
-		for(int i=0;i<n;i++) a_sorted[i]=a[i];
-
-		sort(a_sorted,a_sorted+n);
-		sort(p,p+m);
-		bool ispossible = true;
-		
-		if(p[0]!=1){
-			if(a_sorted[0]!=a[0]){
-				cout << "NO\n";
-				continue;
-			}
-		}else{
-			for(int i=0;i<n-1;i++){
-				if(a[i]>a[i+1]){
-					if(binary_search(p,p+m,i+1)) continue;
-					else ispossible=false;
+		vector<int> a(n);
+		for (int i = 0; i < n; ++i) {
+			cin >> a[i];
+		}
+		vector<int> p(n);
+		for (int i = 0; i < m; ++i) {
+			int pos;
+			cin >> pos;
+			p[pos - 1] = 1;
+		}
+		while (true) {
+			bool ok = false;
+			for (int i = 0; i < n; ++i) {
+				if (p[i] && a[i] > a[i + 1]) {
+					ok = true;
+					swap(a[i], a[i + 1]);
 				}
 			}
-			if(ispossible) cout << "YES\n";
-			else cout << "NO\n";
+			if (!ok) break;
 		}
+		bool ok = true;
+		for (int i = 0; i < n - 1; ++i) {
+			ok &= a[i] <= a[i + 1];
+		}
+		if (ok) cout << "YES" << endl;
+		else cout << "NO" << endl;
 	}
 	return 0;
 }

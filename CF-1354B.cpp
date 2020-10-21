@@ -25,32 +25,26 @@ bool check(ll arr[]) {
 int main() {
 	shammi();
 	w(t) {
-		string s; cin >> s;
-		ll count = 0, mn = 1000000;
-		bool first = true;
-		ll iter = 0;
-		for (ll i = 0; i < s.length(); i++) {
-			ll present[3] = {0};
-			for (ll j = i; j < s.length(); j++) {
-				count++;
-				iter++;
-				present[s[j] - '1'] = 1;
-				if (check(present)) {
-					// cout << "Length of current sub-seq = " << count << nl;
-					break;
-				}
-			}
-			if (first && !check(present)) {
-				first = false;
-				break;
-			}
-			if (check(present)) mn = min(mn, count);
-			count = 0;
-			if (mn == 3) break;
+		// char buf[200043];
+		// scanf("%s", buf);
+		string S; cin >> S;
+		int ans = int(1e9);
+		int n = S.size();
+		vector<pair<char, int> > c;
+		for (auto x : S) {
+			if (c.empty() || c.back().first != x)
+				c.push_back(make_pair(x, 1));
+			else
+				c.back().second++;
 		}
-		if (mn == 1000000) cout << 0 << nl;
-		else cout << mn << nl;
-		// cout << "Number of Iterations : " << iter << nl;
+		int m = c.size();
+		for (int i = 1; i < m - 1; i++)
+			if (c[i - 1].first != c[i + 1].first)
+				ans = min(ans, c[i].second + 2);
+		if (ans > n)
+			ans = 0;
+		// printf("%d\n", ans);
+		cout << ans << nl;
 	}
 	return 0;
 }
