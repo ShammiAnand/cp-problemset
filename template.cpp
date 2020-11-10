@@ -1,8 +1,9 @@
 /*
 This code is written by Shammi Anand
-contact : shammianand101@gmail.com, shammianand.me
+contact : shammianand101@gmail.com, shammianand.live
 */
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 #define ll              long long
