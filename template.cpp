@@ -1,9 +1,11 @@
 /*
-This code is written by Shammi Anand
-contact : shammianand101@gmail.com, shammianand.live
+@author: Shammi Anand
+@contact: shammianand101@gmail.com
+@website: shammianand.live
+@problem:
 */
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 
 #define ll              long long
@@ -12,7 +14,6 @@ using namespace std;
 #define s               second
 #define vi              vector<int>
 #define pii             pair<int, int>
-#define rep(i,a,n)      for(int i=a;i<n;i++)
 #define F(i,n)          for(int i=0;i<n;i++)
 #define all(a)          a.begin(), a.end()
 #define INF             1e9+7
