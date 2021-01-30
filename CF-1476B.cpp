@@ -2,10 +2,7 @@
 @author: Shammi Anand
 @contact: shammianand101@gmail.com
 @website: shammianand.live
-@problem:
-
-//WA
-
+@problem: https://codeforces.com/contest/1476/problem/B
 */
 
 #include <bits/stdc++.h>
@@ -57,17 +54,18 @@ int main() {
 		vi p(n), csum(n);
 		F(i, n) {
 			cin >> p[i];
-			csum[i] = (i == 0 ? p[i] : p[i] + csum[i - 1]);
+			// csum[i] = (i == 0 ? p[i] : p[i] + csum[i - 1]);
 		}
-		ll ans = 0;
+		ll sum = p[0], added = 0;
 		for (int i = 1; i < n; i++) {
-			if ((long double)p[i] / (long double)csum[i - 1] <= (long double)k / 100.0) continue;
-			else {
-				ans += (ceil(p[i] * 100, k) - csum[i - 1]);
-				csum[i] += (ceil(p[i] * 100, k) - csum[i - 1]);
+			ll min_sum = (p[i] * (ll)100 + k - 1) / k;
+			if (min_sum > sum) {
+				added += (min_sum - sum);
+				sum = min_sum;
 			}
+			sum += p[i];
 		}
-		cout << ans << nl;
+		cout << added << nl;
 	}
 	return 0;
 }
