@@ -12,7 +12,7 @@ using namespace std;
 #define pb              push_back
 #define f               first
 #define s               second
-#define vi              vector<ll>
+#define vi              vector<int>
 #define pii             pair<int, int>
 #define F(i,n)          for(int i=0;i<n;i++)
 #define all(a)          a.begin(), a.end()
@@ -30,6 +30,11 @@ void output(const T_vector &v, int start = -1, int end = -1) {
 	}
 }
 
+// most significant set bit : leftmost
+ll clz(ll N) {
+	return N ? 32 - __builtin_clzll(N) : -INF;
+}
+
 void shammi() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #ifndef ONLINE_JUDGE
@@ -41,22 +46,9 @@ void shammi() {
 int main() {
 	shammi();
 	w(t) {
-		int n, x; cin >> n >> x;
-		vector<pii> a(n);
-
-		for (int i = 0; i < n; ++i) {
-			cin >> a[i].f;
-			a[i].s = 1;
-		}
-		for (int i = 0; i < (int) a.size(); ++i) {
-			if (a[i].first % x != 0) break;
-			a.pb({a[i].first / x, a[i].second * x});
-		}
-		ll answer = 0;
-		for (pii p : a) {
-			answer += (ll) p.f * p.s;
-		}
-		cout << answer << nl;
+		ll a, b, c; cin >> a >> b >> c;
+		if ((a + b + c) % 9 != 0) cout << "NO\n";
+		else cout << ((min({a, b, c}) >= (a + b + c) / 9) ? "YES\n" : "NO\n");
 	}
 	return 0;
 }
