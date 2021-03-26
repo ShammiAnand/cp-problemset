@@ -47,7 +47,7 @@ int main() {
 	shammi();
 	w(t) {
 		int n; cin >> n;
-		unordered_map<int, int> freq;
+		map<int, int> freq;
 		int mx = 0;
 		F(i, n) {
 			int x; cin >> x;
